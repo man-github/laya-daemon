@@ -1,0 +1,14 @@
+Package: laya-daemon
+Version: 1.0.0
+Section: net
+Priority: optional
+Architecture: amd64
+Maintainer: Laya AI Team <support@laya-ai.com>
+Depends: systemd, libonnxruntime-dev | libonnxruntime1.21, libpoppler-cpp-dev | libpoppler-cpp0v5, libre2-dev | libre2-9
+Homepage: https://github.com/laya-ai/laya
+Description: High-Performance Multimodal & Multilingual System 1 Decision Daemon
+ Laya Daemon is an independent, carrier-grade, multimodal System 1 decision
+ microservice engineered for high-throughput operational environments.
+ Designed as a standalone profiling engine or inline proxy companion, it delivers
+ ultra-low-latency text classification, dynamic Data Loss Prevention (DLP),
+ multi-format document text extraction, and vision OCR in a single unified architecture.

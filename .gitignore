@@ -1,0 +1,54 @@
+# Build Artifacts
+build/
+dist/
+bin/
+out/
+cmake-build-*/
+*.o
+*.a
+*.so
+*.dylib
+*.deb
+
+# Compiled Binaries (when built in root)
+/laya_daemon
+/laya_client
+/benchmark_client
+/benchmark_per_core
+/benchmark_client.cpp
+
+# Runtime Logs & Sockets
+*.log
+*.pid
+*.sock
+/run/
+/tmp/
+
+# Model Files (large binary weights > 100MB)
+model/*.onnx
+model/*.bin
+model/*.tar.gz
+model/*.zip
+
+# Python Virtual Environments & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# IDE & Editor Configurations
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.si4project/
+*.sublime-project
+*.sublime-workspace
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini

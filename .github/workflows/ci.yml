@@ -1,0 +1,40 @@
+name: CI Build & Test
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Install System Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake pkg-config \
+                                libonnxruntime-dev libpoppler-cpp-dev \
+                                libre2-dev libarchive-dev libtinyxml2-dev
+
+    - name: Compile with Makefile
+      run: |
+        make clean
+        make -j$(nproc)
+
+    - name: Verify Binary Production
+      run: |
+        ls -la build/
+        test -f build/laya_daemon
+        test -f build/laya_client
+        test -f build/benchmark_client
+        test -f build/benchmark_per_core
+
+    - name: Package Debian Release (.deb)
+      run: |
+        bash packaging/build_deb.sh
+        test -f dist/laya-daemon_1.0.0_amd64.deb

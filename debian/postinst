@@ -1,0 +1,26 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        # Create runtime directories with proper permissions
+        mkdir -p /etc/laya /var/log/laya /run/laya
+        chmod 0755 /var/log/laya
+        chmod 0775 /run/laya
+
+        # Reload systemd and enable service
+        if [ -d /run/systemd/system ]; then
+            systemctl daemon-reload
+            systemctl enable laya-daemon.service || true
+            systemctl restart laya-daemon.service || true
+        fi
+        ;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+exit 0

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+    <laya>
+        <enabled>true</enabled>
+        <comment>Laya AI Profiling Engine</comment>
+        <parentgroup>security</parentgroup>
+        <subgroup>antivirus</subgroup>
+        <pipeline_order>6</pipeline_order>
+        <pipeline_label>Laya AI Profiling</pipeline_label>
+        <logo>fa-brain</logo>
+        <wizard>0</wizard>
+        <type>section</type>
+        <flags>1</flags>
+        <desc><![CDATA[
+            <p><b>Laya AI Profiling Engine</b> provides ultra-low-latency non-autoregressive decision classification, DLP regex scanning, and vision OCR.</p>
+        ]]></desc>
+        <global>
+            <enabled n="0">
+                <comment>Enabled</comment>
+                <value>laya_enable</value>
+                <type>BOOL</type>
+                <desc><![CDATA[Master toggle for Laya AI daemon communication.]]></desc>
+            </enabled>
+            <socket_path n="1">
+                <comment>Socket Path</comment>
+                <value>/tmp/laya.sock</value>
+                <type>STRING</type>
+                <desc><![CDATA[Path to the Laya daemon Unix domain socket.]]></desc>
+            </socket_path>
+            <worker_threads n="2">
+                <comment>Worker Threads</comment>
+                <value>4</value>
+                <type>INT</type>
+                <desc><![CDATA[Number of dedicated worker threads handling client connections.]]></desc>
+            </worker_threads>
+            <max_connections n="3">
+                <comment>Max Connections</comment>
+                <value>1024</value>
+                <type>INT</type>
+                <desc><![CDATA[Maximum number of concurrent IPC socket connections.]]></desc>
+            </max_connections>
+            <read_timeout_ms n="4">
+                <comment>Read Timeout (ms)</comment>
+                <value>5000</value>
+                <type>INT</type>
+                <desc><![CDATA[Client request read timeout in milliseconds.]]></desc>
+            </read_timeout_ms>
+            <cache_max_entries n="5">
+                <comment>Max Regex Cache Entries</comment>
+                <value>512</value>
+                <type>INT</type>
+                <desc><![CDATA[Maximum number of compiled RE2 patterns kept in memory.]]></desc>
+            </cache_max_entries>
+            <cache_idle_ttl n="6">
+                <comment>Cache Idle TTL (seconds)</comment>
+                <value>900</value>
+                <type>INT</type>
+                <desc><![CDATA[Idle seconds before an unused compiled regex pattern is purged.]]></desc>
+            </cache_idle_ttl>
+        </global>
+        <template>
+            <directory_entry>
+                <enabled n="0"><comment>Enabled</comment><value>enabled</value><type>BOOL</type><desc><![CDATA[When disabled, this directory is skipped during model auto-discovery.]]></desc></enabled>
+                <comment n="1"><comment>Comment</comment><value>Description</value><type>STRING</type><desc><![CDATA[Administrative notes for this model directory.]]></desc></comment>
+                <path n="2"><comment>Model Directory Path</comment><value>/usr/local/src/laya-prototype/model</value><type>STRING</type><desc><![CDATA[Filesystem path containing ONNX model files.]]></desc></path>
+                <recursive n="3"><comment>Recursive Scan</comment><value>FALSE</value><type>BOOL</type><desc><![CDATA[Recursively scan subdirectories for ONNX models.]]></desc></recursive>
+            </directory_entry>
+            <model_entry>
+                <enabled n="0"><comment>Enabled</comment><value>enabled</value><type>BOOL</type><desc><![CDATA[When disabled, this model is not loaded.]]></desc></enabled>
+                <comment n="1"><comment>Comment</comment><value>Model Description</value><type>STRING</type><desc><![CDATA[Notes describing this model role binding.]]></desc></comment>
+                <filename n="2"><comment>ONNX Filename</comment><value>model.onnx</value><type>STRING</type><desc><![CDATA[Exact filename of the ONNX model inside discovered directories.]]></desc></filename>
+                <role n="3"><comment>Role</comment><value>DECISION</value><type>STRING_SELECT_ONE</type><desc><![CDATA[Functional pipeline role: DECISION, OCR_DET, or OCR_REC.]]></desc></role>
+                <companion_path n="4"><comment>Companion Asset Path</comment><value></value><type>STRING</type><desc><![CDATA[Path to companion file (tokenizer.json or dictionary keys txt).]]></desc></companion_path>
+            </model_entry>
+            <exclude_entry>
+                <enabled n="0"><comment>Enabled</comment><value>enabled</value><type>BOOL</type><desc><![CDATA[When enabled, matching ONNX filenames are blacklisted from loading.]]></desc></enabled>
+                <comment n="1"><comment>Comment</comment><value>Exclude reason</value><type>STRING</type><desc><![CDATA[Reason for blacklisting these models.]]></desc></comment>
+                <pattern n="2"><comment>Filename Wildcards</comment><value>*.tmp</value><type>STRING</type><desc><![CDATA[Comma-separated wildcard patterns to exclude (e.g. *_test.onnx).]]></desc></pattern>
+            </exclude_entry>
+        </template>
+        <subsection>
+            <directories>
+                <enabled>true</enabled>
+                <comment>Model Directories</comment>
+                <template>directory_entry</template>
+                <parentgroup>inherit</parentgroup>
+                <logo/>
+                <wizard_action>false</wizard_action>
+                <type>section</type>
+                <desc><![CDATA[Directories scanned by Laya for ONNX model discovery.]]></desc>
+            </directories>
+            <models>
+                <enabled>true</enabled>
+                <comment>Model Role Bindings</comment>
+                <template>model_entry</template>
+                <parentgroup>inherit</parentgroup>
+                <logo/>
+                <wizard_action>false</wizard_action>
+                <type>section</type>
+                <desc><![CDATA[Role bindings and companion configuration files for ONNX models.]]></desc>
+            </models>
+            <exclusions>
+                <enabled>true</enabled>
+                <comment>Model Exclusions</comment>
+                <template>exclude_entry</template>
+                <parentgroup>inherit</parentgroup>
+                <logo/>
+                <wizard_action>false</wizard_action>
+                <type>section</type>
+                <desc><![CDATA[Wildcard rules to prevent loading unwanted or experimental models.]]></desc>
+            </exclusions>
+        </subsection>
+        <select>
+            <laya_enable>
+                <FALSE><comment>FALSE</comment><value>TRUE</value><desc><![CDATA[Disable Laya AI daemon communication.]]></desc></FALSE>
+                <TRUE><comment>TRUE</comment><value>FALSE</value><desc><![CDATA[Enable Laya AI daemon communication.]]></desc></TRUE>
+            </laya_enable>
+            <enabled>
+                <FALSE><comment>FALSE</comment><value>FALSE</value><desc><![CDATA[Disable this entry.]]></desc></FALSE>
+                <TRUE><comment>TRUE</comment><value>TRUE</value><desc><![CDATA[Enable this entry.]]></desc></TRUE>
+            </enabled>
+            <role>
+                <DECISION><comment>DECISION</comment><value>DECISION</value><desc><![CDATA[ModernBERT System 1 text decision engine.]]></desc></DECISION>
+                <OCR_DET><comment>OCR_DET</comment><value>OCR_DET</value><desc><![CDATA[PP-OCRv4 text detection vision model.]]></desc></OCR_DET>
+                <OCR_REC><comment>OCR_REC</comment><value>OCR_REC</value><desc><![CDATA[PP-OCRv4 text recognition vision model.]]></desc></OCR_REC>
+            </role>
+        </select>
+    </laya>
+</section>

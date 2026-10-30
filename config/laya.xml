@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<laya>
+    <!-- Daemon Core Settings -->
+    <daemon>
+        <enabled>TRUE</enabled>
+        <socket_path>/tmp/laya.sock</socket_path>
+        <worker_threads>4</worker_threads>
+        <max_connections>1024</max_connections>
+        <read_timeout_ms>5000</read_timeout_ms>
+        <socket_permissions>0660</socket_permissions>
+    </daemon>
+
+    <!-- RE2 Compiled Regex Cache Settings -->
+    <regex_cache>
+        <enabled>TRUE</enabled>
+        <max_entries>512</max_entries>
+        <idle_ttl_seconds>900</idle_ttl_seconds>
+    </regex_cache>
+
+    <!-- ONNX Model Directories & Blacklists -->
+    <models>
+        <enabled>TRUE</enabled>
+        <intra_op_threads>1</intra_op_threads>
+        <inter_op_threads>1</inter_op_threads>
+
+        <!-- Auto-discovery directories -->
+        <directory id="1">
+            <enabled>TRUE</enabled>
+            <comment>Primary ONNX models store</comment>
+            <path>/usr/local/src/laya-prototype/model</path>
+            <recursive>FALSE</recursive>
+        </directory>
+
+        <!-- Role bindings / overrides -->
+        <model id="10">
+            <enabled>TRUE</enabled>
+            <comment>Production ModernBERT Decision Model</comment>
+            <filename>model_quantized.onnx</filename>
+            <role>DECISION</role>
+            <companion_path>/usr/local/src/laya-prototype/model/tokenizer.json</companion_path>
+        </model>
+
+        <model id="12">
+            <enabled>TRUE</enabled>
+            <comment>PaddleOCR Detection Model</comment>
+            <filename>ch_PP-OCRv4_det.onnx</filename>
+            <role>OCR_DET</role>
+        </model>
+
+        <model id="14">
+            <enabled>TRUE</enabled>
+            <comment>PaddleOCR Recognition Model</comment>
+            <filename>ch_PP-OCRv4_rec.onnx</filename>
+            <role>OCR_REC</role>
+            <companion_path>/usr/local/src/laya-prototype/model/ch_PP-OCR_keys_v1.txt</companion_path>
+        </model>
+
+        <!-- Exclusions / Blacklists -->
+        <exclude id="20">
+            <enabled>TRUE</enabled>
+            <comment>Skip testing and intermediate checkpoints</comment>
+            <pattern>*_test.onnx,test_*,*checkpoint*</pattern>
+        </exclude>
+    </models>
+
+    <!-- Configurable Response Template -->
+    <response_template>
+        <enabled>TRUE</enabled>
+        <format>JSON</format>
+        <include_verdict>TRUE</include_verdict>
+        <include_score>TRUE</include_score>
+        <include_latency>TRUE</include_latency>
+        <include_matched_patterns>TRUE</include_matched_patterns>
+        <include_tokens>FALSE</include_tokens>
+        <verdict_key>verdict</verdict_key>
+        <score_key>score</score_key>
+        <latency_key>latency_ms</latency_key>
+        <matched_patterns_key>matched_patterns</matched_patterns_key>
+    </response_template>
+</laya>

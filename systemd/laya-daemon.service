@@ -1,0 +1,38 @@
+[Unit]
+Description=Laya AI Multimodal & Multilingual System 1 Decision Daemon
+Documentation=https://github.com/laya-ai/laya
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+
+# Service Directory Life Cycles (managed automatically by systemd)
+RuntimeDirectory=laya
+RuntimeDirectoryMode=0775
+LogsDirectory=laya
+LogsDirectoryMode=0755
+ConfigurationDirectory=laya
+
+# Process Execution
+ExecStart=/usr/bin/laya_daemon --config /etc/laya/laya.xml --pidfile /run/laya/laya_daemon.pid
+ExecReload=/bin/kill -HUP $MAINPID
+PIDFile=/run/laya/laya_daemon.pid
+
+# Termination & Recovery
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=10
+Restart=always
+RestartSec=3
+
+# Resource & Sandboxing Constraints
+LimitNOFILE=65536
+TasksMax=4096
+ProtectSystem=full
+ProtectHome=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

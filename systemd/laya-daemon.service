@@ -1,6 +1,6 @@
 [Unit]
 Description=Laya AI Multimodal & Multilingual System 1 Decision Daemon
-Documentation=https://github.com/laya-ai/laya
+Documentation=https://github.com/man-github/laya-daemon
 After=network.target
 
 [Service]

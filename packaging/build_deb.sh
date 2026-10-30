@@ -7,7 +7,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-VERSION="1.0.0"
+VERSION="0.1.0"
 PACKAGE_NAME="laya-daemon"
 ARCH="amd64"
 DEB_FILE="${PACKAGE_NAME}_${VERSION}_${ARCH}.deb"
@@ -31,6 +31,7 @@ mkdir -p "$STAGING_DIR/DEBIAN"
 mkdir -p "$STAGING_DIR/usr/bin"
 mkdir -p "$STAGING_DIR/etc/laya"
 mkdir -p "$STAGING_DIR/lib/systemd/system"
+mkdir -p "$STAGING_DIR/usr/share/keyrings"
 mkdir -p "$STAGING_DIR/var/log/laya"
 mkdir -p "$STAGING_DIR/run/laya"
 mkdir -p "$STAGING_DIR/usr/share/doc/$PACKAGE_NAME"
@@ -41,6 +42,11 @@ install -m 0755 "$REPO_ROOT/build/laya_daemon" "$STAGING_DIR/usr/bin/laya_daemon
 install -m 0755 "$REPO_ROOT/build/laya_client" "$STAGING_DIR/usr/bin/laya_client"
 install -m 0755 "$REPO_ROOT/build/benchmark_client" "$STAGING_DIR/usr/bin/benchmark_client"
 install -m 0755 "$REPO_ROOT/build/benchmark_per_core" "$STAGING_DIR/usr/bin/benchmark_per_core"
+
+# Copy GPG Public Keyring
+if [ -f "$REPO_ROOT/packaging/keys/laya-archive-keyring.gpg" ]; then
+    install -m 0644 "$REPO_ROOT/packaging/keys/laya-archive-keyring.gpg" "$STAGING_DIR/usr/share/keyrings/laya-archive-keyring.gpg"
+fi
 
 # Copy Configuration
 install -m 0644 "$REPO_ROOT/config/laya.xml" "$STAGING_DIR/etc/laya/laya.xml"

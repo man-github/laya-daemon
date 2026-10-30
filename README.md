@@ -1,5 +1,6 @@
 # Laya AI Daemon: Multimodal & Multilingual System 1 Decision Engine
 
+[![Release](https://img.shields.io/badge/Release-v0.1.0-blue.svg)](https://github.com/man-github/laya-daemon/releases)
 [![C++20](https://img.shields.io/badge/Language-C%2B%2B20-blue.svg)](https://en.cppreference.com/w/cpp/20)
 [![ONNX Runtime](https://img.shields.io/badge/Inference-ONNX%20Runtime%20v1.21-00599C.svg)](https://onnxruntime.ai/)
 [![RE2 Engine](https://img.shields.io/badge/Regex-Google%20RE2%20Linear-4285F4.svg)](https://github.com/google/re2)
@@ -97,27 +98,25 @@ flowchart TD
 
 ## Installation & Deployment
 
-### Method 1: Install via APT Repository (Debian / Ubuntu)
+### Method 1: Install via APT & Precompiled Release (Debian / Ubuntu)
 
-For production deployments on Debian (12 Bookworm, 13 Trixie) or Ubuntu (22.04 LTS, 24.04 LTS), install signed `.deb` packages directly via APT:
+For production deployments on Debian (12 Bookworm, 13 Trixie) or Ubuntu (22.04 LTS, 24.04 LTS):
 
 ```bash
 # 1. Install prerequisite transport and keyring packages
 sudo apt-get update && sudo apt-get install -y ca-certificates curl gnupg
 
-# 2. Import official Laya AI armored GPG public signing key into /etc/apt/keyrings/
+# 2. Import official Laya release signing key from GitHub into /etc/apt/keyrings/
 sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://repo.laya-ai.com/laya.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/laya-archive-keyring.gpg
+curl -fsSL https://raw.githubusercontent.com/man-github/laya-daemon/main/packaging/keys/laya-archive-keyring.gpg | sudo tee /etc/apt/keyrings/laya-archive-keyring.gpg > /dev/null
 sudo chmod a+r /etc/apt/keyrings/laya-archive-keyring.gpg
 
-# 3. Add the official Laya APT repository source list
-echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/laya-archive-keyring.gpg] https://repo.laya-ai.com/apt stable main" | sudo tee /etc/apt/sources.list.d/laya.list > /dev/null
+# 3. Download and install precompiled v0.1.0 release package
+curl -LO https://github.com/man-github/laya-daemon/releases/download/v0.1.0/laya-daemon_0.1.0_amd64.deb
+sudo dpkg -i laya-daemon_0.1.0_amd64.deb
+sudo apt-get install -f
 
-# 4. Update package index and install laya-daemon
-sudo apt-get update
-sudo apt-get install -y laya-daemon
-
-# 5. Verify daemon status and system service
+# 4. Verify daemon status and system service
 sudo systemctl status laya-daemon
 ```
 
@@ -133,7 +132,7 @@ make deb
 # (or execute bash packaging/build_deb.sh directly)
 
 # Install the generated package
-sudo dpkg -i dist/laya-daemon_1.0.0_amd64.deb
+sudo dpkg -i dist/laya-daemon_0.1.0_amd64.deb
 
 # Verify systemd service startup
 sudo systemctl status laya-daemon

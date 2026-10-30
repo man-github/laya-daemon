@@ -1,11 +1,11 @@
 Package: laya-daemon
-Version: 1.0.0
+Version: 0.1.0
 Section: net
 Priority: optional
 Architecture: amd64
-Maintainer: Laya AI Team <support@laya-ai.com>
+Maintainer: man-github <50514596+man-github@users.noreply.github.com>
 Depends: systemd, libonnxruntime-dev | libonnxruntime1.21, libpoppler-cpp-dev | libpoppler-cpp0v5, libre2-dev | libre2-9
-Homepage: https://github.com/laya-ai/laya
+Homepage: https://github.com/man-github/laya-daemon
 Description: High-Performance Multimodal & Multilingual System 1 Decision Daemon
  Laya Daemon is an independent, carrier-grade, multimodal System 1 decision
  microservice engineered for high-throughput operational environments.

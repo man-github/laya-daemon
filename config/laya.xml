@@ -63,6 +63,47 @@
         </exclude>
     </models>
 
+    <!-- Baseline DLP Regex Patterns -->
+    <dlp_patterns>
+        <enabled>TRUE</enabled>
+        <pattern id="1">
+            <name>AWS_KEY</name>
+            <regex>AKIA[0-9A-Z]{16}</regex>
+            <verdict>SECRET_LEAK</verdict>
+            <score>99</score>
+        </pattern>
+        <pattern id="2">
+            <name>GITHUB_PAT</name>
+            <regex>ghp_[0-9a-zA-Z]{36}</regex>
+            <verdict>SECRET_LEAK</verdict>
+            <score>99</score>
+        </pattern>
+        <pattern id="3">
+            <name>SLACK_TOKEN</name>
+            <regex>xox[baprs]-[0-9a-zA-Z]{10,48}</regex>
+            <verdict>SECRET_LEAK</verdict>
+            <score>99</score>
+        </pattern>
+        <pattern id="4">
+            <name>PRIVATE_KEY</name>
+            <regex>-----BEGIN (?:RSA|OPENSSH|DSA|EC|PGP) PRIVATE KEY-----</regex>
+            <verdict>SECRET_LEAK</verdict>
+            <score>100</score>
+        </pattern>
+        <pattern id="5">
+            <name>MALICIOUS_SCRIPT</name>
+            <regex>(?i)powershell.*ransomware</regex>
+            <verdict>MALICIOUS</verdict>
+            <score>95</score>
+        </pattern>
+        <pattern id="6">
+            <name>CVE_EXPLOIT</name>
+            <regex>(?i)CVE-[0-9]{4}-[0-9]{4,}</regex>
+            <verdict>EXPLOIT</verdict>
+            <score>95</score>
+        </pattern>
+    </dlp_patterns>
+
     <!-- Configurable Response Template -->
     <response_template>
         <enabled>TRUE</enabled>

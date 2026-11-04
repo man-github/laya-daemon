@@ -7,7 +7,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-VERSION="0.1.0"
+VERSION="0.2.0"
 PACKAGE_NAME="laya-daemon"
 ARCH="amd64"
 DEB_FILE="${PACKAGE_NAME}_${VERSION}_${ARCH}.deb"
@@ -35,6 +35,7 @@ mkdir -p "$STAGING_DIR/usr/share/keyrings"
 mkdir -p "$STAGING_DIR/var/log/laya"
 mkdir -p "$STAGING_DIR/run/laya"
 mkdir -p "$STAGING_DIR/usr/share/doc/$PACKAGE_NAME"
+mkdir -p "$STAGING_DIR/usr/share/man/man1"
 
 # 3. Copy Binaries
 echo "[3/5] Installing binaries and configuration files..."
@@ -51,12 +52,21 @@ fi
 # Copy Configuration
 install -m 0644 "$REPO_ROOT/config/laya.xml" "$STAGING_DIR/etc/laya/laya.xml"
 install -m 0644 "$REPO_ROOT/config/laya_section.xml" "$STAGING_DIR/etc/laya/laya_section.xml"
+install -m 0644 "$REPO_ROOT/config/patterns.json" "$STAGING_DIR/etc/laya/patterns.json"
+install -m 0644 "$REPO_ROOT/config/test_suite.json" "$STAGING_DIR/etc/laya/test_suite.json"
 
 # Copy Systemd Unit
 install -m 0644 "$REPO_ROOT/systemd/laya-daemon.service" "$STAGING_DIR/lib/systemd/system/laya-daemon.service"
 
-# Copy Documentation
+# Copy Documentation & Man Pages
 install -m 0644 "$REPO_ROOT/README.md" "$STAGING_DIR/usr/share/doc/$PACKAGE_NAME/README.md"
+if [ -f "$REPO_ROOT/docs/LAYA_CLIENT.md" ]; then
+    install -m 0644 "$REPO_ROOT/docs/LAYA_CLIENT.md" "$STAGING_DIR/usr/share/doc/$PACKAGE_NAME/LAYA_CLIENT.md"
+fi
+if [ -f "$REPO_ROOT/man/man1/laya_client.1" ]; then
+    gzip -9 -n -c "$REPO_ROOT/man/man1/laya_client.1" > "$STAGING_DIR/usr/share/man/man1/laya_client.1.gz"
+    chmod 0644 "$STAGING_DIR/usr/share/man/man1/laya_client.1.gz"
+fi
 if [ -f "$REPO_ROOT/LICENSE" ]; then
     install -m 0644 "$REPO_ROOT/LICENSE" "$STAGING_DIR/usr/share/doc/$PACKAGE_NAME/copyright"
 fi

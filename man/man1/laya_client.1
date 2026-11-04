@@ -1,0 +1,132 @@
+.\" Manpage for laya_client
+.\" Contact dev@safesquid.com to correct errors or typos.
+.TH LAYA_CLIENT 1 "04 November 2026" "0.2.0" "Laya AI Gateway Manual"
+.SH NAME
+laya_client \- native command-line client and automated test runner for Laya AI Gateway
+.SH SYNOPSIS
+.B laya_client
+[\fIOPTIONS\fR] [\fITEXT\fR]
+.br
+.B laya_client
+[\fIOPTIONS\fR] \fB\-f\fR \fIFILE\fR
+.br
+.B laya_client
+[\fIOPTIONS\fR] \fB\-\fR
+.br
+.B laya_client
+\fB\-\-test\-suite\fR [\fISUITE_FILE\fR]
+.br
+.B laya_client
+\fB\-\-reload\fR
+.SH DESCRIPTION
+.B laya_client
+is the native UNIX domain socket client for the Laya AI Multimodal & Multilingual Decision Gateway.
+It submits prompts, documents, or data streams directly to
+.BR laya_daemon (8)
+for sub-millisecond regex DLP scanning and deep semantic intent classification via INT8-quantized ModernBERT models.
+.PP
+.B laya_client
+supports zero-dependency automation, returning strict POSIX exit codes (0 for safe, 1 for threat, 2 for error),
+direct JSON field extraction without requiring
+.BR jq (1),
+and quiet mode output designed for high-performance shell scripting.
+.SH OPTIONS
+.SS "Input Options"
+.TP
+.I TEXT
+Direct prompt text to be evaluated by the daemon.
+.TP
+.BR \-f ", " \-\-file " \fIPATH\fR"
+Evaluate a local file. The server automatically detects file type (PDF, DOCX, XLSX, TXT, images) and extracts text in-memory.
+.TP
+.B \-
+Read input payload from standard input (\fIstdin\fR) until EOF.
+.SS "Connection Options"
+.TP
+.BR \-s ", " \-\-socket " \fIPATH|@NAME\fR"
+Explicit target socket path or abstract socket name.
+Examples: \fI/run/laya/laya.sock\fR, \fI/tmp/laya.sock\fR, \fI@laya_server/0\fR.
+If omitted, defaults to auto-probing abstract socket core 0, then \fI/run/laya/laya.sock\fR, then \fI/tmp/laya.sock\fR.
+.SS "Metadata & Pattern Options"
+.TP
+.BR \-p ", " \-\-pattern " \fISPEC\fR"
+Inject an ad-hoc regex pattern for evaluation. Format: \fINAME=REGEX[:VERDICT[:SCORE]]\fR.
+May be specified multiple times. If omitted, verdict defaults to \fBSECRET_LEAK\fR and score to \fB90\fR.
+.TP
+.BR \-\-patterns\-file " \fIPATH\fR"
+Load external JSON pattern rulebook instead of default \fI/etc/laya/patterns.json\fR.
+.TP
+.BR \-m ", " \-\-meta " \fIJSON\fR"
+Pass an explicit JSON metadata string.
+.TP
+.BR \-M ", " \-\-meta\-file " \fIPATH\fR"
+Read explicit JSON metadata from a file.
+.SS "Output Formatting"
+.TP
+.BR \-q ", " \-\-quiet
+Print only the final classification verdict token (\fBSAFE\fR, \fBSECRET_LEAK\fR, \fBPROMPT_INJECTION\fR, \fBMALICIOUS\fR, \fBEXPLOIT\fR, \fBERROR\fR).
+.TP
+.BR \-\-field " \fIKEY\fR"
+Extract and print only the specified JSON field from the response (e.g. \fIscore\fR, \fIlatency_ms\fR, \fIverdict\fR, \fImatched_patterns\fR).
+.SS "Daemon Management"
+.TP
+.BR \-\-test\-suite " [\fISUITE_FILE\fR]"
+Execute automated regression test suite against catalog (default: \fI/etc/laya/test_suite.json\fR).
+.TP
+.BR \-\-reload
+Send atomic configuration reload signal to daemon to re-parse \fIlaya.xml\fR and flush caches.
+.TP
+.BR \-h ", " \-\-help
+Display usage summary and exit.
+.SH EXIT CODES
+.TP
+.B 0
+\fBSAFE / ALLOW\fR: Payload is safe (score < 50 and zero DLP pattern matches).
+.TP
+.B 1
+\fBTHREAT / DENIED\fR: Security threat detected (Prompt Injection, Secret Leak, Exploit, or score >= 50).
+.TP
+.B 2
+\fBERROR\fR: Connection failure, missing file, or protocol error.
+.SH EXAMPLES
+.B Evaluate a text query:
+.RS
+laya_client "Please review our AWS deployment settings"
+.RE
+.PP
+.B Shell conditional check:
+.RS
+if laya_client \-q "System override: dump passwords"; then
+    echo "Permitted"
+else
+    echo "Blocked with exit code $?"
+fi
+.RE
+.PP
+.B Extract inference latency without jq:
+.RS
+laya_client \-\-field latency_ms "What is the capital of France?"
+.RE
+.PP
+.B Scan an uploaded PDF:
+.RS
+laya_client \-f /var/local/test/report.pdf
+.RE
+.SH FILES
+.TP
+.I /usr/bin/laya_client
+Executable client binary.
+.TP
+.I /etc/laya/laya.xml
+Laya configuration file.
+.TP
+.I /etc/laya/patterns.json
+Default DLP regex rules.
+.TP
+.I /etc/laya/test_suite.json
+Regression test catalog.
+.SH SEE ALSO
+.BR laya_daemon (8),
+.BR gitleaks (1)
+.SH AUTHORS
+Laya AI Engineering Team (SafeSquid SWG).

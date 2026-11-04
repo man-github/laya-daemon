@@ -372,10 +372,27 @@ void core_worker_loop(int core_id, unsigned int somaxconn, laya::NeuralEngine* e
                         text_to_scan = laya::DocumentExtractor::extract_auto(payload_buf.data(), payload_buf.size());
                     }
 
+                    // Merge client request patterns with daemon baseline patterns from laya.xml
+                    std::vector<laya::DlpPattern> active_patterns = patterns;
+                    if (config.dlp_patterns.enabled) {
+                        for (const auto& cp : config.dlp_patterns.patterns) {
+                            bool exists = false;
+                            for (const auto& ap : active_patterns) {
+                                if (ap.name == cp.name) {
+                                    exists = true;
+                                    break;
+                                }
+                            }
+                            if (!exists) {
+                                active_patterns.push_back({cp.name, cp.regex_str, cp.verdict, cp.score});
+                            }
+                        }
+                    }
+
                     // Evaluate RE2 DLP regex rules with intelligent LRU cache
                     laya::DlpScanResult dlp;
-                    if (g_regex_cache && !patterns.empty() && !text_to_scan.empty()) {
-                        dlp = g_regex_cache->scan(text_to_scan, patterns, epoch);
+                    if (g_regex_cache && !active_patterns.empty() && !text_to_scan.empty()) {
+                        dlp = g_regex_cache->scan(text_to_scan, active_patterns, epoch);
                     }
 
                     // Run ModernBERT decision model
@@ -525,6 +542,7 @@ int main(int argc, char* argv[]) {
     std::cout << "Filesystem Socket:    " << config.daemon.socket_path << std::endl;
     std::cout << "Regex Cache Bound:    " << config.regex_cache.max_entries << " entries (TTL: " 
               << config.regex_cache.idle_ttl_seconds << "s)\n";
+    std::cout << "Baseline Patterns:    " << config.dlp_patterns.patterns.size() << " configured rules\n";
     std::cout << "Primary Decision Dir: " << primary_decision_dir << std::endl;
 
     std::unique_ptr<laya::NeuralEngine> engine;
@@ -559,7 +577,8 @@ int main(int argc, char* argv[]) {
                 g_regex_cache->configure(reloaded_cfg.regex_cache.max_entries, reloaded_cfg.regex_cache.idle_ttl_seconds);
                 g_regex_cache->clear();
             }
-            std::cout << "[laya_daemon] Reload complete. Regex cache flushed.\n";
+            std::cout << "[laya_daemon] Reload complete. Baseline patterns: " 
+                      << reloaded_cfg.dlp_patterns.patterns.size() << ". Regex cache flushed.\n";
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }

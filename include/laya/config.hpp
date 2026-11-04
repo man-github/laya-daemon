@@ -93,6 +93,28 @@ struct ModelsConfig {
 };
 
 /**
+ * @struct ConfigDlpPattern
+ * @brief Baseline DLP regular expression pattern from configuration.
+ */
+struct ConfigDlpPattern {
+    int id = 0;
+    bool enabled = true;
+    std::string name;
+    std::string regex_str;
+    std::string verdict = "SECRET_LEAK";
+    int score = 90;
+};
+
+/**
+ * @struct DlpPatternsConfig
+ * @brief Configured baseline DLP regular expressions.
+ */
+struct DlpPatternsConfig {
+    bool enabled = true;
+    std::vector<ConfigDlpPattern> patterns;
+};
+
+/**
  * @struct ResponseTemplateConfig
  * @brief Configurable JSON response fields and key remapping.
  */
@@ -118,6 +140,7 @@ struct LayaConfig {
     DaemonConfig daemon;
     RegexCacheConfig regex_cache;
     ModelsConfig models;
+    DlpPatternsConfig dlp_patterns;
     ResponseTemplateConfig response_template;
     std::string loaded_path;
 };
@@ -322,7 +345,26 @@ private:
             }
         }
 
-        // 4. <response_template>
+        // 4. <dlp_patterns>
+        const tinyxml2::XMLElement* dlp_elem = root->FirstChildElement("dlp_patterns");
+        if (dlp_elem) {
+            cfg.dlp_patterns.enabled = get_child_bool(dlp_elem, "enabled", true);
+            for (const tinyxml2::XMLElement* p = dlp_elem->FirstChildElement("pattern"); p; p = p->NextSiblingElement("pattern")) {
+                ConfigDlpPattern pat;
+                pat.id = p->IntAttribute("id", 0);
+                pat.enabled = get_child_bool(p, "enabled", true);
+                if (!pat.enabled) continue;
+                pat.name = get_child_text(p, "name");
+                pat.regex_str = get_child_text(p, "regex");
+                pat.verdict = get_child_text(p, "verdict", "SECRET_LEAK");
+                pat.score = get_child_int(p, "score", 90);
+                if (!pat.name.empty() && !pat.regex_str.empty()) {
+                    cfg.dlp_patterns.patterns.push_back(std::move(pat));
+                }
+            }
+        }
+
+        // 5. <response_template>
         const tinyxml2::XMLElement* resp_elem = root->FirstChildElement("response_template");
         if (resp_elem) {
             cfg.response_template.enabled = get_child_bool(resp_elem, "enabled", true);

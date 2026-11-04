@@ -53,14 +53,17 @@ deb:
 	@bash packaging/build_deb.sh
 
 install: all
-	install -d /usr/bin /etc/laya /var/log/laya /run/laya
+	install -d /usr/bin /etc/laya /var/log/laya /run/laya /usr/share/man/man1
 	install -m 0755 $(BUILD_DIR)/laya_daemon /usr/bin/laya_daemon
 	install -m 0755 $(BUILD_DIR)/laya_client /usr/bin/laya_client
 	install -m 0755 $(BUILD_DIR)/benchmark_client /usr/bin/benchmark_client
 	install -m 0755 $(BUILD_DIR)/benchmark_per_core /usr/bin/benchmark_per_core
 	install -m 0644 config/laya.xml /etc/laya/laya.xml
 	install -m 0644 config/laya_section.xml /etc/laya/laya_section.xml
+	install -m 0644 config/patterns.json /etc/laya/patterns.json
+	install -m 0644 config/test_suite.json /etc/laya/test_suite.json
 	install -m 0644 systemd/laya-daemon.service /lib/systemd/system/laya-daemon.service
+	@if [ -f man/man1/laya_client.1 ]; then install -m 0644 man/man1/laya_client.1 /usr/share/man/man1/laya_client.1; fi
 	systemctl daemon-reload || true
 
 clean:

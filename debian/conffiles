@@ -1,2 +1,4 @@
 /etc/laya/laya.xml
 /etc/laya/laya_section.xml
+/etc/laya/patterns.json
+/etc/laya/test_suite.json

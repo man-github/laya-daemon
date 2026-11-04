@@ -1,0 +1,1554 @@
+{
+  "policy_epoch": 1,
+  "description": "Enterprise DLP Secret Rules imported from Gitleaks",
+  "total_rules": 221,
+  "patterns": [
+    {
+      "name": "1PASSWORD_SECRET_KEY",
+      "regex": "\\bA3-[A-Z0-9]{6}-(?:(?:[A-Z0-9]{11})|(?:[A-Z0-9]{6}-[A-Z0-9]{5}))-[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{5}\\b",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a possible 1Password secret key, potentially compromising access to secrets in vaults."
+    },
+    {
+      "name": "1PASSWORD_SERVICE_ACCOUNT_TOKEN",
+      "regex": "ops_eyJ[a-zA-Z0-9+/]{250,}={0,3}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a possible 1Password service account token, potentially compromising access to secrets in vaults."
+    },
+    {
+      "name": "ADAFRUIT_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:adafruit)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9_-]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a potential Adafruit API Key, which could lead to unauthorized access to Adafruit services and sensitive data exposure."
+    },
+    {
+      "name": "ADOBE_CLIENT_ID",
+      "regex": "(?i)[\\w.-]{0,50}?(?:adobe)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a pattern that resembles an Adobe OAuth Web Client ID, posing a risk of compromised Adobe integrations and data breaches."
+    },
+    {
+      "name": "ADOBE_CLIENT_SECRET",
+      "regex": "\\b(p8e-(?i)[a-z0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a potential Adobe Client Secret, which, if exposed, could allow unauthorized Adobe service access and data manipulation."
+    },
+    {
+      "name": "AGE_SECRET_KEY",
+      "regex": "AGE-SECRET-KEY-1[QPZRY9X8GF2TVDW0S3JN54KHCE6MUA7L]{58}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a potential Age encryption tool secret key, risking data decryption and unauthorized access to sensitive information."
+    },
+    {
+      "name": "AIRTABLE_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:airtable)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{17})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a possible Airtable API Key, potentially compromising database access and leading to data leakage or alteration."
+    },
+    {
+      "name": "AIRTABLE_PERSONNAL_ACCESS_TOKEN",
+      "regex": "\\b(pat[[:alnum:]]{14}\\.[a-f0-9]{64})\\b",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a possible Airtable Personal AccessToken, potentially compromising database access and leading to data leakage or alteration."
+    },
+    {
+      "name": "ALGOLIA_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:algolia)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified an Algolia API Key, which could result in unauthorized search operations and data exposure on Algolia-managed platforms."
+    },
+    {
+      "name": "ALIBABA_ACCESS_KEY_ID",
+      "regex": "\\b(LTAI(?i)[a-z0-9]{20})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected an Alibaba Cloud AccessKey ID, posing a risk of unauthorized cloud resource access and potential data compromise."
+    },
+    {
+      "name": "ALIBABA_SECRET_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:alibaba)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{30})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a potential Alibaba Cloud Secret Key, potentially allowing unauthorized operations and data access within Alibaba Cloud."
+    },
+    {
+      "name": "ANTHROPIC_ADMIN_API_KEY",
+      "regex": "\\b(sk-ant-admin01-[a-zA-Z0-9_\\-]{93}AA)(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected an Anthropic Admin API Key, risking unauthorized access to administrative functions and sensitive AI model configurations."
+    },
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "regex": "\\b(sk-ant-api03-[a-zA-Z0-9_\\-]{93}AA)(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified an Anthropic API Key, which may compromise AI assistant integrations and expose sensitive data to unauthorized access."
+    },
+    {
+      "name": "ARTIFACTORY_API_KEY",
+      "regex": "\\bAKCp[A-Za-z0-9]{69}\\b",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected an Artifactory api key, posing a risk unauthorized access to the central repository."
+    },
+    {
+      "name": "ARTIFACTORY_REFERENCE_TOKEN",
+      "regex": "\\bcmVmd[A-Za-z0-9]{59}\\b",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected an Artifactory reference token, posing a risk of impersonation and unauthorized access to the central repository."
+    },
+    {
+      "name": "ASANA_CLIENT_ID",
+      "regex": "(?i)[\\w.-]{0,50}?(?:asana)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9]{16})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a potential Asana Client ID, risking unauthorized access to Asana projects and sensitive task information."
+    },
+    {
+      "name": "ASANA_CLIENT_SECRET",
+      "regex": "(?i)[\\w.-]{0,50}?(?:asana)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified an Asana Client Secret, which could lead to compromised project management integrity and unauthorized access."
+    },
+    {
+      "name": "ATLASSIAN_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:(?-i:ATLASSIAN|[Aa]tlassian)|(?-i:CONFLUENCE|[Cc]onfluence)|(?-i:JIRA|[Jj]ira))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{20}[a-f0-9]{4})(?:[\\x60'\"\\s;]|\\\\[nr]|$)|\\b(ATATT3[A-Za-z0-9_\\-=]{186})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected an Atlassian API token, posing a threat to project management and collaboration tool security and data confidentiality."
+    },
+    {
+      "name": "AUTHRESS_SERVICE_CLIENT_ACCESS_KEY",
+      "regex": "\\b((?:sc|ext|scauth|authress)_(?i)[a-z0-9]{5,30}\\.[a-z0-9]{4,6}\\.(?-i:acc)[_-][a-z0-9-]{10,32}\\.[a-z0-9+/_=-]{30,120})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a possible Authress Service Client Access Key, which may compromise access control services and sensitive data."
+    },
+    {
+      "name": "AWS_ACCESS_TOKEN",
+      "regex": "\\b((?:A3T[A-Z0-9]|AKIA|ASIA|ABIA|ACCA)[A-Z2-7]{16})\\b",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a pattern that may indicate AWS credentials, risking unauthorized cloud resource access and data breaches on AWS platforms."
+    },
+    {
+      "name": "AWS_AMAZON_BEDROCK_API_KEY_LONG_LIVED",
+      "regex": "\\b(ABSK[A-Za-z0-9+/]{109,269}={0,2})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a pattern that may indicate long-lived Amazon Bedrock API keys, risking unauthorized Amazon Bedrock usage"
+    },
+    {
+      "name": "AWS_AMAZON_BEDROCK_API_KEY_SHORT_LIVED",
+      "regex": "bedrock-api-key-YmVkcm9jay5hbWF6b25hd3MuY29t",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a pattern that may indicate short-lived Amazon Bedrock API keys, risking unauthorized Amazon Bedrock usage"
+    },
+    {
+      "name": "AZURE_AD_CLIENT_SECRET",
+      "regex": "(?:^|[\\\\'\"\\x60\\s>=:(,)])([a-zA-Z0-9_~.]{3}\\dQ~[a-zA-Z0-9_~.-]{31,34})(?:$|[\\\\'\"\\x60\\s<),])",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Azure AD Client Secret"
+    },
+    {
+      "name": "BEAMER_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:beamer)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(b_[a-z0-9=_\\-]{44})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Beamer API token, potentially compromising content management and exposing sensitive notifications and updates."
+    },
+    {
+      "name": "BITBUCKET_CLIENT_ID",
+      "regex": "(?i)[\\w.-]{0,50}?(?:bitbucket)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a potential Bitbucket Client ID, risking unauthorized repository access and potential codebase exposure."
+    },
+    {
+      "name": "BITBUCKET_CLIENT_SECRET",
+      "regex": "(?i)[\\w.-]{0,50}?(?:bitbucket)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9=_\\-]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a potential Bitbucket Client Secret, posing a risk of compromised code repositories and unauthorized access."
+    },
+    {
+      "name": "BITTREX_ACCESS_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:bittrex)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Bittrex Access Key, which could lead to unauthorized access to cryptocurrency trading accounts and financial loss."
+    },
+    {
+      "name": "BITTREX_SECRET_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:bittrex)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Bittrex Secret Key, potentially compromising cryptocurrency transactions and financial security."
+    },
+    {
+      "name": "CISCO_MERAKI_API_KEY",
+      "regex": "[\\w.-]{0,50}?(?i:[\\w.-]{0,50}?(?:(?-i:[Mm]eraki|MERAKI))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9a-f]{40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Cisco Meraki is a cloud-managed IT solution that provides networking, security, and device management through an easy-to-use interface."
+    },
+    {
+      "name": "CLICKHOUSE_CLOUD_API_SECRET_KEY",
+      "regex": "\\b(4b1d[A-Za-z0-9]{38})\\b",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a pattern that may indicate clickhouse cloud API secret key, risking unauthorized clickhouse cloud api access and data breaches on ClickHouse Cloud platforms."
+    },
+    {
+      "name": "CLOJARS_API_TOKEN",
+      "regex": "(?i)CLOJARS_[a-z0-9]{60}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a possible Clojars API token, risking unauthorized access to Clojure libraries and potential code manipulation."
+    },
+    {
+      "name": "CLOUDFLARE_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:cloudflare)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9_-]{40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Cloudflare API Key, potentially compromising cloud application deployments and operational security."
+    },
+    {
+      "name": "CLOUDFLARE_GLOBAL_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:cloudflare)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{37})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Cloudflare Global API Key, potentially compromising cloud application deployments and operational security."
+    },
+    {
+      "name": "CLOUDFLARE_ORIGIN_CA_KEY",
+      "regex": "\\b(v1\\.0-[a-f0-9]{24}-[a-f0-9]{146})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Cloudflare Origin CA Key, potentially compromising cloud application deployments and operational security."
+    },
+    {
+      "name": "CODECOV_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:codecov)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a pattern resembling a Codecov Access Token, posing a risk of unauthorized access to code coverage reports and sensitive data."
+    },
+    {
+      "name": "COHERE_API_TOKEN",
+      "regex": "[\\w.-]{0,50}?(?i:[\\w.-]{0,50}?(?:cohere|CO_API_KEY)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-zA-Z0-9]{40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Cohere Token, posing a risk of unauthorized access to AI services and data manipulation."
+    },
+    {
+      "name": "COINBASE_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:coinbase)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9_-]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Coinbase Access Token, posing a risk of unauthorized access to cryptocurrency accounts and financial transactions."
+    },
+    {
+      "name": "CONFLUENT_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:confluent)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{16})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Confluent Access Token, which could compromise access to streaming data platforms and sensitive data flow."
+    },
+    {
+      "name": "CONFLUENT_SECRET_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:confluent)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Confluent Secret Key, potentially risking unauthorized operations and data access within Confluent services."
+    },
+    {
+      "name": "CONTENTFUL_DELIVERY_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:contentful)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9=_\\-]{43})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Contentful delivery API token, posing a risk to content management systems and data integrity."
+    },
+    {
+      "name": "CURL_AUTH_HEADER",
+      "regex": "\\bcurl\\b(?:.*?|.*?(?:[\\r\\n]{1,2}.*?){1,5})[ \\t\\n\\r](?:-H|--header)(?:=|[ \\t]{0,5})(?:\"(?i)(?:Authorization:[ \\t]{0,5}(?:Basic[ \\t]([a-z0-9+/]{8,}={0,3})|(?:Bearer|(?:Api-)?Token)[ \\t]([\\w=~@.+/-]{8,})|([\\w=~@.+/-]{8,}))|(?:(?:X-(?:[a-z]+-)?)?(?:Api-?)?(?:Key|Token)):[ \\t]{0,5}([\\w=~@.+/-]{8,}))\"|'(?i)(?:Authorization:[ \\t]{0,5}(?:Basic[ \\t]([a-z0-9+/]{8,}={0,3})|(?:Bearer|(?:Api-)?Token)[ \\t]([\\w=~@.+/-]{8,})|([\\w=~@.+/-]{8,}))|(?:(?:X-(?:[a-z]+-)?)?(?:Api-?)?(?:Key|Token)):[ \\t]{0,5}([\\w=~@.+/-]{8,}))')(?:\\B|\\s|\\z)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a potential authorization token provided in a curl command header, which could compromise the curl accessed resource."
+    },
+    {
+      "name": "CURL_AUTH_USER",
+      "regex": "\\bcurl\\b(?:.*|.*(?:[\\r\\n]{1,2}.*){1,5})[ \\t\\n\\r](?:-u|--user)(?:=|[ \\t]{0,5})(\"(:[^\"]{3,}|[^:\"]{3,}:|[^:\"]{3,}:[^\"]{3,})\"|'([^:']{3,}:[^']{3,})'|((?:\"[^\"]{3,}\"|'[^']{3,}'|[\\w$@.-]+):(?:\"[^\"]{3,}\"|'[^']{3,}'|[\\w${}@.-]+)))(?:\\s|\\z)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a potential basic authorization token provided in a curl command, which could compromise the curl accessed resource."
+    },
+    {
+      "name": "DATABRICKS_API_TOKEN",
+      "regex": "\\b(dapi[a-f0-9]{32}(?:-\\d)?)(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Databricks API token, which may compromise big data analytics platforms and sensitive data processing."
+    },
+    {
+      "name": "DATADOG_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:datadog)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Datadog Access Token, potentially risking monitoring and analytics data exposure and manipulation."
+    },
+    {
+      "name": "DEFINED_NETWORKING_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:dnkey)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(dnkey-[a-z0-9=_\\-]{26}-[a-z0-9=_\\-]{52})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Defined Networking API token, which could lead to unauthorized network operations and data breaches."
+    },
+    {
+      "name": "DIGITALOCEAN_ACCESS_TOKEN",
+      "regex": "\\b(doo_v1_[a-f0-9]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a DigitalOcean OAuth Access Token, risking unauthorized cloud resource access and data compromise."
+    },
+    {
+      "name": "DIGITALOCEAN_PAT",
+      "regex": "\\b(dop_v1_[a-f0-9]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a DigitalOcean Personal Access Token, posing a threat to cloud infrastructure security and data privacy."
+    },
+    {
+      "name": "DIGITALOCEAN_REFRESH_TOKEN",
+      "regex": "(?i)\\b(dor_v1_[a-f0-9]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a DigitalOcean OAuth Refresh Token, which could allow prolonged unauthorized access and resource manipulation."
+    },
+    {
+      "name": "DISCORD_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:discord)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Discord API key, potentially compromising communication channels and user data privacy on Discord."
+    },
+    {
+      "name": "DISCORD_CLIENT_ID",
+      "regex": "(?i)[\\w.-]{0,50}?(?:discord)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9]{18})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Discord client ID, which may lead to unauthorized integrations and data exposure in Discord applications."
+    },
+    {
+      "name": "DISCORD_CLIENT_SECRET",
+      "regex": "(?i)[\\w.-]{0,50}?(?:discord)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9=_\\-]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a potential Discord client secret, risking compromised Discord bot integrations and data leaks."
+    },
+    {
+      "name": "DOPPLER_API_TOKEN",
+      "regex": "dp\\.pt\\.(?i)[a-z0-9]{43}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Doppler API token, posing a risk to environment and secrets management security."
+    },
+    {
+      "name": "DRONECI_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:droneci)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Droneci Access Token, potentially compromising continuous integration and deployment workflows."
+    },
+    {
+      "name": "DROPBOX_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:dropbox)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{15})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Dropbox API secret, which could lead to unauthorized file access and data breaches in Dropbox storage."
+    },
+    {
+      "name": "DROPBOX_LONG_LIVED_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:dropbox)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{11}(AAAAAAAAAA)[a-z0-9\\-_=]{43})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Dropbox long-lived API token, risking prolonged unauthorized access to cloud storage and sensitive data."
+    },
+    {
+      "name": "DROPBOX_SHORT_LIVED_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:dropbox)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(sl\\.[a-z0-9\\-=_]{135})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Dropbox short-lived API token, posing a risk of temporary but potentially harmful data access and manipulation."
+    },
+    {
+      "name": "DUFFEL_API_TOKEN",
+      "regex": "duffel_(?:test|live)_(?i)[a-z0-9_\\-=]{43}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Duffel API token, which may compromise travel platform integrations and sensitive customer data."
+    },
+    {
+      "name": "DYNATRACE_API_TOKEN",
+      "regex": "dt0c01\\.(?i)[a-z0-9]{24}\\.[a-z0-9]{64}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Dynatrace API token, potentially risking application performance monitoring and data exposure."
+    },
+    {
+      "name": "EASYPOST_API_TOKEN",
+      "regex": "\\bEZAK(?i)[a-z0-9]{54}\\b",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified an EasyPost API token, which could lead to unauthorized postal and shipment service access and data exposure."
+    },
+    {
+      "name": "EASYPOST_TEST_API_TOKEN",
+      "regex": "\\bEZTK(?i)[a-z0-9]{54}\\b",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected an EasyPost test API token, risking exposure of test environments and potentially sensitive shipment data."
+    },
+    {
+      "name": "ETSY_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:(?-i:ETSY|[Ee]tsy))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{24})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found an Etsy Access Token, potentially compromising Etsy shop management and customer data."
+    },
+    {
+      "name": "FACEBOOK_ACCESS_TOKEN",
+      "regex": "(?i)\\b(\\d{15,16}(\\||%)[0-9a-z\\-_]{27,40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Facebook Access Token, posing a risk of unauthorized access to Facebook accounts and personal data exposure."
+    },
+    {
+      "name": "FACEBOOK_PAGE_ACCESS_TOKEN",
+      "regex": "\\b(EAA[MC](?i)[a-z0-9]{100,})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Facebook Page Access Token, posing a risk of unauthorized access to Facebook accounts and personal data exposure."
+    },
+    {
+      "name": "FACEBOOK_SECRET",
+      "regex": "(?i)[\\w.-]{0,50}?(?:facebook)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Facebook Application secret, posing a risk of unauthorized access to Facebook accounts and personal data exposure."
+    },
+    {
+      "name": "FASTLY_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:fastly)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9=_\\-]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Fastly API key, which may compromise CDN and edge cloud services, leading to content delivery and security issues."
+    },
+    {
+      "name": "FINICITY_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:finicity)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Finicity API token, potentially risking financial data access and unauthorized financial operations."
+    },
+    {
+      "name": "FINICITY_CLIENT_SECRET",
+      "regex": "(?i)[\\w.-]{0,50}?(?:finicity)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{20})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Finicity Client Secret, which could lead to compromised financial service integrations and data breaches."
+    },
+    {
+      "name": "FINNHUB_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:finnhub)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{20})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Finnhub Access Token, risking unauthorized access to financial market data and analytics."
+    },
+    {
+      "name": "FLICKR_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:flickr)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Flickr Access Token, posing a risk of unauthorized photo management and potential data leakage."
+    },
+    {
+      "name": "FLUTTERWAVE_ENCRYPTION_KEY",
+      "regex": "FLWSECK_TEST-(?i)[a-h0-9]{12}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Flutterwave Encryption Key, which may compromise payment processing and sensitive financial information."
+    },
+    {
+      "name": "FLUTTERWAVE_PUBLIC_KEY",
+      "regex": "FLWPUBK_TEST-(?i)[a-h0-9]{32}-X",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Finicity Public Key, potentially exposing public cryptographic operations and integrations."
+    },
+    {
+      "name": "FLUTTERWAVE_SECRET_KEY",
+      "regex": "FLWSECK_TEST-(?i)[a-h0-9]{32}-X",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Flutterwave Secret Key, risking unauthorized financial transactions and data breaches."
+    },
+    {
+      "name": "FLYIO_ACCESS_TOKEN",
+      "regex": "\\b((?:fo1_[\\w-]{43}|fm1[ar]_[a-zA-Z0-9+\\/]{100,}={0,3}|fm2_[a-zA-Z0-9+\\/]{100,}={0,3}))(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Fly.io API key"
+    },
+    {
+      "name": "FRAMEIO_API_TOKEN",
+      "regex": "fio-u-(?i)[a-z0-9\\-_=]{64}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Frame.io API token, potentially compromising video collaboration and project management."
+    },
+    {
+      "name": "FREEMIUS_SECRET_KEY",
+      "regex": "(?i)[\"']secret_key[\"']\\s*=>\\s*[\"'](sk_[\\S]{29})[\"']",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Freemius secret key, potentially exposing sensitive information."
+    },
+    {
+      "name": "FRESHBOOKS_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:freshbooks)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Freshbooks Access Token, posing a risk to accounting software access and sensitive financial data exposure."
+    },
+    {
+      "name": "GCP_API_KEY",
+      "regex": "\\b(AIza[\\w-]{35})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a GCP API key, which could lead to unauthorized access to Google Cloud services and data breaches."
+    },
+    {
+      "name": "GENERIC_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:access|auth|(?-i:[Aa]pi|API)|credential|creds|key|passw(?:or)?d|secret|token)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([\\w.=-]{10,150}|[a-z0-9][a-z0-9+/]{11,}={0,3})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations."
+    },
+    {
+      "name": "GITHUB_APP_TOKEN",
+      "regex": "(?:ghu|ghs)_[0-9a-zA-Z]{36}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a GitHub App Token, which may compromise GitHub application integrations and source code security."
+    },
+    {
+      "name": "GITHUB_FINE_GRAINED_PAT",
+      "regex": "github_pat_\\w{82}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a GitHub Fine-Grained Personal Access Token, risking unauthorized repository access and code manipulation."
+    },
+    {
+      "name": "GITHUB_OAUTH",
+      "regex": "gho_[0-9a-zA-Z]{36}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a GitHub OAuth Access Token, posing a risk of compromised GitHub account integrations and data leaks."
+    },
+    {
+      "name": "GITHUB_PAT",
+      "regex": "ghp_[0-9a-zA-Z]{36}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a GitHub Personal Access Token, potentially leading to unauthorized repository access and sensitive content exposure."
+    },
+    {
+      "name": "GITHUB_REFRESH_TOKEN",
+      "regex": "ghr_[0-9a-zA-Z]{36}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a GitHub Refresh Token, which could allow prolonged unauthorized access to GitHub services."
+    },
+    {
+      "name": "GITLAB_CICD_JOB_TOKEN",
+      "regex": "glcbt-[0-9a-zA-Z]{1,5}_[0-9a-zA-Z_-]{20}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a GitLab CI/CD Job Token, potential access to projects and some APIs on behalf of a user while the CI job is running."
+    },
+    {
+      "name": "GITLAB_DEPLOY_TOKEN",
+      "regex": "gldt-[0-9a-zA-Z_\\-]{20}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a GitLab Deploy Token, risking access to repositories, packages and containers with write access."
+    },
+    {
+      "name": "GITLAB_FEATURE_FLAG_CLIENT_TOKEN",
+      "regex": "glffct-[0-9a-zA-Z_\\-]{20}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a GitLab feature flag client token, risks exposing user lists and features flags used by an application."
+    },
+    {
+      "name": "GITLAB_FEED_TOKEN",
+      "regex": "glft-[0-9a-zA-Z_\\-]{20}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a GitLab feed token, risking exposure of user data."
+    },
+    {
+      "name": "GITLAB_INCOMING_MAIL_TOKEN",
+      "regex": "glimt-[0-9a-zA-Z_\\-]{25}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a GitLab incoming mail token, risking manipulation of data sent by mail."
+    },
+    {
+      "name": "GITLAB_KUBERNETES_AGENT_TOKEN",
+      "regex": "glagent-[0-9a-zA-Z_\\-]{50}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a GitLab Kubernetes Agent token, risking access to repos and registry of projects connected via agent."
+    },
+    {
+      "name": "GITLAB_OAUTH_APP_SECRET",
+      "regex": "gloas-[0-9a-zA-Z_\\-]{64}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a GitLab OIDC Application Secret, risking access to apps using GitLab as authentication provider."
+    },
+    {
+      "name": "GITLAB_PAT",
+      "regex": "glpat-[\\w-]{20}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a GitLab Personal Access Token, risking unauthorized access to GitLab repositories and codebase exposure."
+    },
+    {
+      "name": "GITLAB_PAT_ROUTABLE",
+      "regex": "\\bglpat-[0-9a-zA-Z_-]{27,300}\\.[0-9a-z]{2}[0-9a-z]{7}\\b",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a GitLab Personal Access Token (routable), risking unauthorized access to GitLab repositories and codebase exposure."
+    },
+    {
+      "name": "GITLAB_PTT",
+      "regex": "glptt-[0-9a-f]{40}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a GitLab Pipeline Trigger Token, potentially compromising continuous integration workflows and project security."
+    },
+    {
+      "name": "GITLAB_RRT",
+      "regex": "GR1348941[\\w-]{20}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a GitLab Runner Registration Token, posing a risk to CI/CD pipeline integrity and unauthorized access."
+    },
+    {
+      "name": "GITLAB_RUNNER_AUTHENTICATION_TOKEN",
+      "regex": "glrt-[0-9a-zA-Z_\\-]{20}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a GitLab Runner Authentication Token, posing a risk to CI/CD pipeline integrity and unauthorized access."
+    },
+    {
+      "name": "GITLAB_RUNNER_AUTHENTICATION_TOKEN_ROUTABLE",
+      "regex": "\\bglrt-t\\d_[0-9a-zA-Z_\\-]{27,300}\\.[0-9a-z]{2}[0-9a-z]{7}\\b",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a GitLab Runner Authentication Token (Routable), posing a risk to CI/CD pipeline integrity and unauthorized access."
+    },
+    {
+      "name": "GITLAB_SCIM_TOKEN",
+      "regex": "glsoat-[0-9a-zA-Z_\\-]{20}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a GitLab SCIM Token, posing a risk to unauthorized access for a organization or instance."
+    },
+    {
+      "name": "GITLAB_SESSION_COOKIE",
+      "regex": "_gitlab_session=[0-9a-z]{32}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a GitLab Session Cookie, posing a risk to unauthorized access to a user account."
+    },
+    {
+      "name": "GITTER_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:gitter)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9_-]{40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Gitter Access Token, which may lead to unauthorized access to chat and communication services."
+    },
+    {
+      "name": "GOCARDLESS_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:gocardless)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(live_(?i)[a-z0-9\\-_=]{40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a GoCardless API token, potentially risking unauthorized direct debit payment operations and financial data exposure."
+    },
+    {
+      "name": "GRAFANA_API_KEY",
+      "regex": "(?i)\\b(eyJrIjoi[A-Za-z0-9]{70,400}={0,3})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Grafana API key, which could compromise monitoring dashboards and sensitive data analytics."
+    },
+    {
+      "name": "GRAFANA_CLOUD_API_TOKEN",
+      "regex": "(?i)\\b(glc_[A-Za-z0-9+/]{32,400}={0,3})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Grafana cloud API token, risking unauthorized access to cloud-based monitoring services and data exposure."
+    },
+    {
+      "name": "GRAFANA_SERVICE_ACCOUNT_TOKEN",
+      "regex": "(?i)\\b(glsa_[A-Za-z0-9]{32}_[A-Fa-f0-9]{8})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Grafana service account token, posing a risk of compromised monitoring services and data integrity."
+    },
+    {
+      "name": "HARNESS_API_KEY",
+      "regex": "(?:pat|sat)\\.[a-zA-Z0-9_-]{22}\\.[a-zA-Z0-9]{24}\\.[a-zA-Z0-9]{20}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Harness Access Token (PAT or SAT), risking unauthorized access to a Harness account."
+    },
+    {
+      "name": "HASHICORP_TF_API_TOKEN",
+      "regex": "(?i)[a-z0-9]{14}\\.(?-i:atlasv1)\\.[a-z0-9\\-_=]{60,70}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a HashiCorp Terraform user/org API token, which may lead to unauthorized infrastructure management and security breaches."
+    },
+    {
+      "name": "HASHICORP_TF_PASSWORD",
+      "regex": "(?i)[\\w.-]{0,50}?(?:administrator_login_password|password)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(\"[a-z0-9=_\\-]{8,20}\")(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a HashiCorp Terraform password field, risking unauthorized infrastructure configuration and security breaches."
+    },
+    {
+      "name": "HEROKU_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:heroku)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Heroku API Key, potentially compromising cloud application deployments and operational security."
+    },
+    {
+      "name": "HEROKU_API_KEY_V2",
+      "regex": "\\b((HRKU-AA[0-9a-zA-Z_-]{58}))(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Heroku API Key, potentially compromising cloud application deployments and operational security."
+    },
+    {
+      "name": "HUBSPOT_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:hubspot)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a HubSpot API Token, posing a risk to CRM data integrity and unauthorized marketing operations."
+    },
+    {
+      "name": "HUGGINGFACE_ACCESS_TOKEN",
+      "regex": "\\b(hf_(?i:[a-z]{34}))(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Hugging Face Access token, which could lead to unauthorized access to AI models and sensitive data."
+    },
+    {
+      "name": "HUGGINGFACE_ORGANIZATION_API_TOKEN",
+      "regex": "\\b(api_org_(?i:[a-z]{34}))(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Hugging Face Organization API token, potentially compromising AI organization accounts and associated data."
+    },
+    {
+      "name": "INFRACOST_API_TOKEN",
+      "regex": "\\b(ico-[a-zA-Z0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected an Infracost API Token, risking unauthorized access to cloud cost estimation tools and financial data."
+    },
+    {
+      "name": "INTERCOM_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:intercom)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9=_\\-]{60})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified an Intercom API Token, which could compromise customer communication channels and data privacy."
+    },
+    {
+      "name": "INTRA42_CLIENT_SECRET",
+      "regex": "\\b(s-s4t2(?:ud|af)-(?i)[abcdef0123456789]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Intra42 client secret, which could lead to unauthorized access to the 42School API and sensitive data."
+    },
+    {
+      "name": "JFROG_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:jfrog|artifactory|bintray|xray)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{73})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a JFrog API Key, posing a risk of unauthorized access to software artifact repositories and build pipelines."
+    },
+    {
+      "name": "JFROG_IDENTITY_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:jfrog|artifactory|bintray|xray)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a JFrog Identity Token, potentially compromising access to JFrog services and sensitive software artifacts."
+    },
+    {
+      "name": "JWT",
+      "regex": "\\b(ey[a-zA-Z0-9]{17,}\\.ey[a-zA-Z0-9\\/\\\\_-]{17,}\\.(?:[a-zA-Z0-9\\/\\\\_-]{10,}={0,2})?)(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a JSON Web Token, which may lead to unauthorized access to web applications and sensitive user data."
+    },
+    {
+      "name": "JWT_BASE64",
+      "regex": "\\bZXlK(?:(aGJHY2lPaU)|(aGNIVWlPaU)|(aGNIWWlPaU)|(aGRXUWlPaU)|(aU5qUWlP)|(amNtbDBJanBi)|(amRIa2lPaU)|(bGNHc2lPbn)|(bGJtTWlPaU)|(cWEzVWlPaU)|(cWQyc2lPb)|(cGMzTWlPaU)|(cGRpSTZJ)|(cmFXUWlP)|(clpYbGZiM0J6SWpwY)|(cmRIa2lPaUp)|(dWIyNWpaU0k2)|(d01tTWlP)|(d01uTWlPaU)|(d2NIUWlPaU)|(emRXSWlPaU)|(emRuUWlP)|(MFlXY2lPaU)|(MGVYQWlPaUp)|(MWNtd2l)|(MWMyVWlPaUp)|(MlpYSWlPaU)|(MlpYSnphVzl1SWpv)|(NElqb2)|(NE5XTWlP)|(NE5YUWlPaU)|(NE5YUWpVekkxTmlJNkl)|(NE5YVWlPaU)|(NmFYQWlPaU))[a-zA-Z0-9\\/\\\\_+\\-\\r\\n]{40,}={0,2}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Base64-encoded JSON Web Token, posing a risk of exposing encoded authentication and data exchange information."
+    },
+    {
+      "name": "KRAKEN_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:kraken)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9\\/=_\\+\\-]{80,90})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Kraken Access Token, potentially compromising cryptocurrency trading accounts and financial security."
+    },
+    {
+      "name": "KUBERNETES_SECRET_YAML",
+      "regex": "(?i)(?:\\bkind:[ \\t]*[\"']?\\bsecret\\b[\"']?(?s:.){0,200}?\\bdata:(?s:.){0,100}?\\s+([\\w.-]+:(?:[ \\t]*(?:\\||>[-+]?)\\s+)?[ \\t]*(?:[\"']?[a-z0-9+/]{10,}={0,3}[\"']?|\\{\\{[ \\t\\w\"|$:=,.-]+}}|\"\"|''))|\\bdata:(?s:.){0,100}?\\s+([\\w.-]+:(?:[ \\t]*(?:\\||>[-+]?)\\s+)?[ \\t]*(?:[\"']?[a-z0-9+/]{10,}={0,3}[\"']?|\\{\\{[ \\t\\w\"|$:=,.-]+}}|\"\"|''))(?s:.){0,200}?\\bkind:[ \\t]*[\"']?\\bsecret\\b[\"']?)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Possible Kubernetes Secret detected, posing a risk of leaking credentials/tokens from your deployments"
+    },
+    {
+      "name": "KUCOIN_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:kucoin)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{24})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Kucoin Access Token, risking unauthorized access to cryptocurrency exchange services and transactions."
+    },
+    {
+      "name": "KUCOIN_SECRET_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:kucoin)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Kucoin Secret Key, which could lead to compromised cryptocurrency operations and financial data breaches."
+    },
+    {
+      "name": "LAUNCHDARKLY_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:launchdarkly)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9=_\\-]{40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Launchdarkly Access Token, potentially compromising feature flag management and application functionality."
+    },
+    {
+      "name": "LINEAR_API_KEY",
+      "regex": "lin_api_(?i)[a-z0-9]{40}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Linear API Token, posing a risk to project management tools and sensitive task data."
+    },
+    {
+      "name": "LINEAR_CLIENT_SECRET",
+      "regex": "(?i)[\\w.-]{0,50}?(?:linear)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Linear Client Secret, which may compromise secure integrations and sensitive project management data."
+    },
+    {
+      "name": "LINKEDIN_CLIENT_ID",
+      "regex": "(?i)[\\w.-]{0,50}?(?:linked[_-]?in)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{14})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a LinkedIn Client ID, risking unauthorized access to LinkedIn integrations and professional data exposure."
+    },
+    {
+      "name": "LINKEDIN_CLIENT_SECRET",
+      "regex": "(?i)[\\w.-]{0,50}?(?:linked[_-]?in)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{16})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a LinkedIn Client secret, potentially compromising LinkedIn application integrations and user data."
+    },
+    {
+      "name": "LOB_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:lob)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}((live|test)_[a-f0-9]{35})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Lob API Key, which could lead to unauthorized access to mailing and address verification services."
+    },
+    {
+      "name": "LOB_PUB_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:lob)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}((test|live)_pub_[a-f0-9]{31})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Lob Publishable API Key, posing a risk of exposing mail and print service integrations."
+    },
+    {
+      "name": "LOOKER_CLIENT_ID",
+      "regex": "(?i)[\\w.-]{0,50}?(?:looker)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{20})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Looker Client ID, risking unauthorized access to a Looker account and exposing sensitive data."
+    },
+    {
+      "name": "LOOKER_CLIENT_SECRET",
+      "regex": "(?i)[\\w.-]{0,50}?(?:looker)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{24})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Looker Client Secret, risking unauthorized access to a Looker account and exposing sensitive data."
+    },
+    {
+      "name": "MAILCHIMP_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:MailchimpSDK.initialize|mailchimp)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{32}-us\\d\\d)(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Mailchimp API key, potentially compromising email marketing campaigns and subscriber data."
+    },
+    {
+      "name": "MAILGUN_PRIVATE_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:mailgun)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(key-[a-f0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Mailgun private API token, risking unauthorized email service operations and data breaches."
+    },
+    {
+      "name": "MAILGUN_PUB_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:mailgun)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(pubkey-[a-f0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Mailgun public validation key, which could expose email verification processes and associated data."
+    },
+    {
+      "name": "MAILGUN_SIGNING_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:mailgun)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-h0-9]{32}-[a-h0-9]{8}-[a-h0-9]{8})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Mailgun webhook signing key, potentially compromising email automation and data integrity."
+    },
+    {
+      "name": "MAPBOX_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:mapbox)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(pk\\.[a-z0-9]{60}\\.[a-z0-9]{22})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a MapBox API token, posing a risk to geospatial services and sensitive location data exposure."
+    },
+    {
+      "name": "MATTERMOST_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:mattermost)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{26})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Mattermost Access Token, which may compromise team communication channels and data privacy."
+    },
+    {
+      "name": "MAXMIND_LICENSE_KEY",
+      "regex": "\\b([A-Za-z0-9]{6}_[A-Za-z0-9]{29}_mmk)(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a potential MaxMind license key."
+    },
+    {
+      "name": "MESSAGEBIRD_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:message[_-]?bird)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{25})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a MessageBird API token, risking unauthorized access to communication platforms and message data."
+    },
+    {
+      "name": "MESSAGEBIRD_CLIENT_ID",
+      "regex": "(?i)[\\w.-]{0,50}?(?:message[_-]?bird)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a MessageBird client ID, potentially compromising API integrations and sensitive communication data."
+    },
+    {
+      "name": "MICROSOFT_TEAMS_WEBHOOK",
+      "regex": "https://[a-z0-9]+\\.webhook\\.office\\.com/webhookb2/[a-z0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}@[a-z0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}/IncomingWebhook/[a-z0-9]{32}/[a-z0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Microsoft Teams Webhook, which could lead to unauthorized access to team collaboration tools and data leaks."
+    },
+    {
+      "name": "NETLIFY_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:netlify)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9=_\\-]{40,46})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Netlify Access Token, potentially compromising web hosting services and site management."
+    },
+    {
+      "name": "NEW_RELIC_BROWSER_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:new-relic|newrelic|new_relic)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(NRJS-[a-f0-9]{19})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a New Relic ingest browser API token, risking unauthorized access to application performance data and analytics."
+    },
+    {
+      "name": "NEW_RELIC_INSERT_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:new-relic|newrelic|new_relic)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(NRII-[a-z0-9-]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a New Relic insight insert key, compromising data injection into the platform."
+    },
+    {
+      "name": "NEW_RELIC_USER_API_ID",
+      "regex": "(?i)[\\w.-]{0,50}?(?:new-relic|newrelic|new_relic)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a New Relic user API ID, posing a risk to application monitoring services and data integrity."
+    },
+    {
+      "name": "NEW_RELIC_USER_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:new-relic|newrelic|new_relic)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(NRAK-[a-z0-9]{27})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a New Relic user API Key, which could lead to compromised application insights and performance monitoring."
+    },
+    {
+      "name": "NOTION_API_TOKEN",
+      "regex": "\\b(ntn_[0-9]{11}[A-Za-z0-9]{32}[A-Za-z0-9]{3})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Notion API token"
+    },
+    {
+      "name": "NPM_ACCESS_TOKEN",
+      "regex": "(?i)\\b(npm_[a-z0-9]{36})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered an npm access token, potentially compromising package management and code repository access."
+    },
+    {
+      "name": "NUGET_CONFIG_PASSWORD",
+      "regex": "(?i)<add key=\\\"(?:(?:ClearText)?Password)\\\"\\s*value=\\\"(.{8,})\\\"\\s*/>",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a password within a Nuget config file, potentially compromising package management access."
+    },
+    {
+      "name": "NYTIMES_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:nytimes|new-york-times,|newyorktimes)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9=_\\-]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Nytimes Access Token, risking unauthorized access to New York Times APIs and content services."
+    },
+    {
+      "name": "OCTOPUS_DEPLOY_API_KEY",
+      "regex": "\\b(API-[A-Z0-9]{26})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a potential Octopus Deploy API key, risking application deployments and operational security."
+    },
+    {
+      "name": "OKTA_ACCESS_TOKEN",
+      "regex": "[\\w.-]{0,50}?(?i:[\\w.-]{0,50}?(?:(?-i:[Oo]kta|OKTA))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(00[\\w=\\-]{40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified an Okta Access Token, which may compromise identity management services and user authentication data."
+    },
+    {
+      "name": "OPENAI_API_KEY",
+      "regex": "\\b(sk-(?:proj|svcacct|admin)-(?:[A-Za-z0-9_-]{74}|[A-Za-z0-9_-]{58})T3BlbkFJ(?:[A-Za-z0-9_-]{74}|[A-Za-z0-9_-]{58})\\b|sk-[a-zA-Z0-9]{20}T3BlbkFJ[a-zA-Z0-9]{20})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found an OpenAI API Key, posing a risk of unauthorized access to AI services and data manipulation."
+    },
+    {
+      "name": "OPENSHIFT_USER_TOKEN",
+      "regex": "\\b(sha256~[\\w-]{43})(?:[^\\w-]|\\z)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found an OpenShift user token, potentially compromising an OpenShift/Kubernetes cluster."
+    },
+    {
+      "name": "PERPLEXITY_API_KEY",
+      "regex": "\\b(pplx-[a-zA-Z0-9]{48})(?:[\\x60'\"\\s;]|\\\\[nr]|$|\\b)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Perplexity API key, which could lead to unauthorized access to Perplexity AI services and data exposure."
+    },
+    {
+      "name": "PLAID_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:plaid)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(access-(?:sandbox|development|production)-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Plaid API Token, potentially compromising financial data aggregation and banking services."
+    },
+    {
+      "name": "PLAID_CLIENT_ID",
+      "regex": "(?i)[\\w.-]{0,50}?(?:plaid)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{24})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Plaid Client ID, which could lead to unauthorized financial service integrations and data breaches."
+    },
+    {
+      "name": "PLAID_SECRET_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:plaid)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{30})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Plaid Secret key, risking unauthorized access to financial accounts and sensitive transaction data."
+    },
+    {
+      "name": "PLANETSCALE_API_TOKEN",
+      "regex": "\\b(pscale_tkn_(?i)[\\w=\\.-]{32,64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a PlanetScale API token, potentially compromising database management and operations."
+    },
+    {
+      "name": "PLANETSCALE_OAUTH_TOKEN",
+      "regex": "\\b(pscale_oauth_[\\w=\\.-]{32,64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a PlanetScale OAuth token, posing a risk to database access control and sensitive data integrity."
+    },
+    {
+      "name": "PLANETSCALE_PASSWORD",
+      "regex": "(?i)\\b(pscale_pw_(?i)[\\w=\\.-]{32,64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a PlanetScale password, which could lead to unauthorized database operations and data breaches."
+    },
+    {
+      "name": "POSTMAN_API_TOKEN",
+      "regex": "\\b(PMAK-(?i)[a-f0-9]{24}\\-[a-f0-9]{34})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Postman API token, potentially compromising API testing and development workflows."
+    },
+    {
+      "name": "PREFECT_API_TOKEN",
+      "regex": "\\b(pnu_[a-zA-Z0-9]{36})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Prefect API token, risking unauthorized access to workflow management and automation services."
+    },
+    {
+      "name": "PRIVATE_KEY",
+      "regex": "(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\\s\\S-]{64,}?KEY(?: BLOCK)?-----",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Private Key, which may compromise cryptographic security and sensitive data encryption."
+    },
+    {
+      "name": "PRIVATEAI_API_TOKEN",
+      "regex": "[\\w.-]{0,50}?(?i:[\\w.-]{0,50}?(?:private[_-]?ai)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{32})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a PrivateAI Token, posing a risk of unauthorized access to AI services and data manipulation."
+    },
+    {
+      "name": "PULUMI_API_TOKEN",
+      "regex": "\\b(pul-[a-f0-9]{40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Pulumi API token, posing a risk to infrastructure as code services and cloud resource management."
+    },
+    {
+      "name": "PYPI_UPLOAD_TOKEN",
+      "regex": "pypi-AgEIcHlwaS5vcmc[\\w-]{50,1000}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a PyPI upload token, potentially compromising Python package distribution and repository integrity."
+    },
+    {
+      "name": "RAPIDAPI_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:rapidapi)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9_-]{50})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a RapidAPI Access Token, which could lead to unauthorized access to various APIs and data services."
+    },
+    {
+      "name": "README_API_TOKEN",
+      "regex": "\\b(rdme_[a-z0-9]{70})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Readme API token, risking unauthorized documentation management and content exposure."
+    },
+    {
+      "name": "RUBYGEMS_API_TOKEN",
+      "regex": "\\b(rubygems_[a-f0-9]{48})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Rubygem API token, potentially compromising Ruby library distribution and package management."
+    },
+    {
+      "name": "SCALINGO_API_TOKEN",
+      "regex": "\\b(tk-us-[\\w-]{48})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Scalingo API token, posing a risk to cloud platform services and application deployment security."
+    },
+    {
+      "name": "SENDBIRD_ACCESS_ID",
+      "regex": "(?i)[\\w.-]{0,50}?(?:sendbird)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Sendbird Access ID, which could compromise chat and messaging platform integrations."
+    },
+    {
+      "name": "SENDBIRD_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:sendbird)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Sendbird Access Token, potentially risking unauthorized access to communication services and user data."
+    },
+    {
+      "name": "SENDGRID_API_TOKEN",
+      "regex": "\\b(SG\\.(?i)[a-z0-9=_\\-\\.]{66})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a SendGrid API token, posing a risk of unauthorized email service operations and data exposure."
+    },
+    {
+      "name": "SENDINBLUE_API_TOKEN",
+      "regex": "\\b(xkeysib-[a-f0-9]{64}\\-(?i)[a-z0-9]{16})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Sendinblue API token, which may compromise email marketing services and subscriber data privacy."
+    },
+    {
+      "name": "SENTRY_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:sentry)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Sentry.io Access Token (old format), risking unauthorized access to error tracking services and sensitive application data."
+    },
+    {
+      "name": "SENTRY_ORG_TOKEN",
+      "regex": "\\bsntrys_eyJpYXQiO[a-zA-Z0-9+/]{10,200}(?:LCJyZWdpb25fdXJs|InJlZ2lvbl91cmwi|cmVnaW9uX3VybCI6)[a-zA-Z0-9+/]{10,200}={0,2}_[a-zA-Z0-9+/]{43}(?:[^a-zA-Z0-9+/]|\\z)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Sentry.io Organization Token, risking unauthorized access to error tracking services and sensitive application data."
+    },
+    {
+      "name": "SENTRY_USER_TOKEN",
+      "regex": "\\b(sntryu_[a-f0-9]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Sentry.io User Token, risking unauthorized access to error tracking services and sensitive application data."
+    },
+    {
+      "name": "SETTLEMINT_APPLICATION_ACCESS_TOKEN",
+      "regex": "\\b(sm_aat_[a-zA-Z0-9]{16})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Settlemint Application Access Token."
+    },
+    {
+      "name": "SETTLEMINT_PERSONAL_ACCESS_TOKEN",
+      "regex": "\\b(sm_pat_[a-zA-Z0-9]{16})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Settlemint Personal Access Token."
+    },
+    {
+      "name": "SETTLEMINT_SERVICE_ACCESS_TOKEN",
+      "regex": "\\b(sm_sat_[a-zA-Z0-9]{16})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Settlemint Service Access Token."
+    },
+    {
+      "name": "SHIPPO_API_TOKEN",
+      "regex": "\\b(shippo_(?:live|test)_[a-fA-F0-9]{40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Shippo API token, potentially compromising shipping services and customer order data."
+    },
+    {
+      "name": "SHOPIFY_ACCESS_TOKEN",
+      "regex": "shpat_[a-fA-F0-9]{32}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Shopify access token, which could lead to unauthorized e-commerce platform access and data breaches."
+    },
+    {
+      "name": "SHOPIFY_CUSTOM_ACCESS_TOKEN",
+      "regex": "shpca_[a-fA-F0-9]{32}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Shopify custom access token, potentially compromising custom app integrations and e-commerce data security."
+    },
+    {
+      "name": "SHOPIFY_PRIVATE_APP_ACCESS_TOKEN",
+      "regex": "shppa_[a-fA-F0-9]{32}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Shopify private app access token, risking unauthorized access to private app data and store operations."
+    },
+    {
+      "name": "SHOPIFY_SHARED_SECRET",
+      "regex": "shpss_[a-fA-F0-9]{32}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Shopify shared secret, posing a risk to application authentication and e-commerce platform security."
+    },
+    {
+      "name": "SIDEKIQ_SECRET",
+      "regex": "(?i)[\\w.-]{0,50}?(?:BUNDLE_ENTERPRISE__CONTRIBSYS__COM|BUNDLE_GEMS__CONTRIBSYS__COM)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-f0-9]{8}:[a-f0-9]{8})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Sidekiq Secret, which could lead to compromised background job processing and application data breaches."
+    },
+    {
+      "name": "SIDEKIQ_SENSITIVE_URL",
+      "regex": "(?i)\\bhttps?://([a-f0-9]{8}:[a-f0-9]{8})@(?:gems.contribsys.com|enterprise.contribsys.com)(?:[\\/|\\#|\\?|:]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Sidekiq Sensitive URL, potentially exposing internal job queues and sensitive operation details."
+    },
+    {
+      "name": "SLACK_APP_TOKEN",
+      "regex": "(?i)xapp-\\d-[A-Z0-9]+-\\d+-[a-z0-9]+",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Slack App-level token, risking unauthorized access to Slack applications and workspace data."
+    },
+    {
+      "name": "SLACK_BOT_TOKEN",
+      "regex": "xoxb-[0-9]{10,13}-[0-9]{10,13}[a-zA-Z0-9-]*",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Slack Bot token, which may compromise bot integrations and communication channel security."
+    },
+    {
+      "name": "SLACK_CONFIG_ACCESS_TOKEN",
+      "regex": "(?i)xoxe.xox[bp]-\\d-[A-Z0-9]{163,166}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Slack Configuration access token, posing a risk to workspace configuration and sensitive data access."
+    },
+    {
+      "name": "SLACK_CONFIG_REFRESH_TOKEN",
+      "regex": "(?i)xoxe-\\d-[A-Z0-9]{146}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Slack Configuration refresh token, potentially allowing prolonged unauthorized access to configuration settings."
+    },
+    {
+      "name": "SLACK_LEGACY_BOT_TOKEN",
+      "regex": "xoxb-[0-9]{8,14}-[a-zA-Z0-9]{18,26}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Slack Legacy bot token, which could lead to compromised legacy bot operations and data exposure."
+    },
+    {
+      "name": "SLACK_LEGACY_TOKEN",
+      "regex": "xox[os]-\\d+-\\d+-\\d+-[a-fA-F\\d]+",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Slack Legacy token, risking unauthorized access to older Slack integrations and user data."
+    },
+    {
+      "name": "SLACK_LEGACY_WORKSPACE_TOKEN",
+      "regex": "xox[ar]-(?:\\d-)?[0-9a-zA-Z]{8,48}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Slack Legacy Workspace token, potentially compromising access to workspace data and legacy features."
+    },
+    {
+      "name": "SLACK_USER_TOKEN",
+      "regex": "xox[pe](?:-[0-9]{10,13}){3}-[a-zA-Z0-9-]{28,34}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Slack User token, posing a risk of unauthorized user impersonation and data access within Slack workspaces."
+    },
+    {
+      "name": "SLACK_WEBHOOK_URL",
+      "regex": "(?:https?://)?hooks.slack.com/(?:services|workflows|triggers)/[A-Za-z0-9+/]{43,56}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Slack Webhook, which could lead to unauthorized message posting and data leakage in Slack channels."
+    },
+    {
+      "name": "SNYK_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:snyk[_.-]?(?:(?:api|oauth)[_.-]?)?(?:key|token))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Snyk API token, potentially compromising software vulnerability scanning and code security."
+    },
+    {
+      "name": "SONAR_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:sonar[_.-]?(login|token))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}((?:squ_|sqp_|sqa_)?[a-z0-9=_\\-]{40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Sonar API token, potentially compromising software vulnerability scanning and code security."
+    },
+    {
+      "name": "SOURCEGRAPH_ACCESS_TOKEN",
+      "regex": "(?i)\\b(\\b(sgp_(?:[a-fA-F0-9]{16}|local)_[a-fA-F0-9]{40}|sgp_[a-fA-F0-9]{40}|[a-fA-F0-9]{40})\\b)(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Sourcegraph is a code search and navigation engine."
+    },
+    {
+      "name": "SQUARE_ACCESS_TOKEN",
+      "regex": "\\b((?:EAAA|sq0atp-)[\\w-]{22,60})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Square Access Token, risking unauthorized payment processing and financial transaction exposure."
+    },
+    {
+      "name": "SQUARESPACE_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:squarespace)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Squarespace Access Token, which may compromise website management and content control on Squarespace."
+    },
+    {
+      "name": "STRIPE_ACCESS_TOKEN",
+      "regex": "\\b((?:sk|rk)_(?:test|live|prod)_[a-zA-Z0-9]{10,99})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Stripe Access Token, posing a risk to payment processing services and sensitive financial data."
+    },
+    {
+      "name": "SUMOLOGIC_ACCESS_ID",
+      "regex": "[\\w.-]{0,50}?(?i:[\\w.-]{0,50}?(?:(?-i:[Ss]umo|SUMO))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3})(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(su[a-zA-Z0-9]{12})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a SumoLogic Access ID, potentially compromising log management services and data analytics integrity."
+    },
+    {
+      "name": "SUMOLOGIC_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:(?-i:[Ss]umo|SUMO))(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{64})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a SumoLogic Access Token, which could lead to unauthorized access to log data and analytics insights."
+    },
+    {
+      "name": "TELEGRAM_BOT_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:telegr)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9]{5,16}:(?-i:A)[a-z0-9_\\-]{34})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Telegram Bot API Token, risking unauthorized bot operations and message interception on Telegram."
+    },
+    {
+      "name": "TRAVISCI_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:travis)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{22})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Travis CI Access Token, potentially compromising continuous integration services and codebase security."
+    },
+    {
+      "name": "TWILIO_API_KEY",
+      "regex": "SK[0-9a-fA-F]{32}",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Twilio API Key, posing a risk to communication services and sensitive customer interaction data."
+    },
+    {
+      "name": "TWITCH_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:twitch)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{30})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Twitch API token, which could compromise streaming services and account integrations."
+    },
+    {
+      "name": "TWITTER_ACCESS_SECRET",
+      "regex": "(?i)[\\w.-]{0,50}?(?:twitter)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{45})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Twitter Access Secret, potentially risking unauthorized Twitter integrations and data breaches."
+    },
+    {
+      "name": "TWITTER_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:twitter)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([0-9]{15,25}-[a-zA-Z0-9]{20,40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Twitter Access Token, posing a risk of unauthorized account operations and social media data exposure."
+    },
+    {
+      "name": "TWITTER_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:twitter)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{25})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Twitter API Key, which may compromise Twitter application integrations and user data security."
+    },
+    {
+      "name": "TWITTER_API_SECRET",
+      "regex": "(?i)[\\w.-]{0,50}?(?:twitter)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{50})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Twitter API Secret, risking the security of Twitter app integrations and sensitive data access."
+    },
+    {
+      "name": "TWITTER_BEARER_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:twitter)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(A{22}[a-zA-Z0-9%]{80,100})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Twitter Bearer Token, potentially compromising API access and data retrieval from Twitter."
+    },
+    {
+      "name": "TYPEFORM_API_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:typeform)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(tfp_[a-z0-9\\-_\\.=]{59})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Typeform API token, which could lead to unauthorized survey management and data collection."
+    },
+    {
+      "name": "VAULT_BATCH_TOKEN",
+      "regex": "\\b(hvb\\.[\\w-]{138,300})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Vault Batch Token, risking unauthorized access to secret management services and sensitive data."
+    },
+    {
+      "name": "VAULT_SERVICE_TOKEN",
+      "regex": "\\b((?:hvs\\.[\\w-]{90,120}|s\\.(?i:[a-z0-9]{24})))(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Identified a Vault Service Token, potentially compromising infrastructure security and access to sensitive credentials."
+    },
+    {
+      "name": "YANDEX_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:yandex)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(t1\\.[A-Z0-9a-z_-]+[=]{0,2}\\.[A-Z0-9a-z_-]{86}[=]{0,2})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Found a Yandex Access Token, posing a risk to Yandex service integrations and user data privacy."
+    },
+    {
+      "name": "YANDEX_API_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:yandex)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(AQVN[A-Za-z0-9_\\-]{35,38})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Discovered a Yandex API Key, which could lead to unauthorized access to Yandex services and data manipulation."
+    },
+    {
+      "name": "YANDEX_AWS_ACCESS_TOKEN",
+      "regex": "(?i)[\\w.-]{0,50}?(?:yandex)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}(YC[a-zA-Z0-9_\\-]{38})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Uncovered a Yandex AWS Access Token, potentially compromising cloud resource access and data security on Yandex Cloud."
+    },
+    {
+      "name": "ZENDESK_SECRET_KEY",
+      "regex": "(?i)[\\w.-]{0,50}?(?:zendesk)(?:[ \\t\\w.-]{0,20})[\\s'\"]{0,3}(?:=|>|:{1,3}=|\\|\\||:|=>|\\?=|,)[\\x60'\"\\s=]{0,5}([a-z0-9]{40})(?:[\\x60'\"\\s;]|\\\\[nr]|$)",
+      "verdict": "SECRET_LEAK",
+      "score": 99,
+      "description": "Detected a Zendesk Secret Key, risking unauthorized access to customer support services and sensitive ticketing data."
+    }
+  ]
+}

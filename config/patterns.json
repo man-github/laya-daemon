@@ -1,0 +1,42 @@
+{
+  "policy_epoch": 1,
+  "description": "Enterprise DLP Regular Expression Patterns for Laya AI Gateway",
+  "patterns": [
+    {
+      "name": "AWS_KEY",
+      "regex": "AKIA[0-9A-Z]{16}",
+      "verdict": "SECRET_LEAK",
+      "score": 99
+    },
+    {
+      "name": "GITHUB_PAT",
+      "regex": "ghp_[0-9a-zA-Z]{36}",
+      "verdict": "SECRET_LEAK",
+      "score": 99
+    },
+    {
+      "name": "SLACK_TOKEN",
+      "regex": "xox[baprs]-[0-9a-zA-Z]{10,48}",
+      "verdict": "SECRET_LEAK",
+      "score": 99
+    },
+    {
+      "name": "PRIVATE_KEY",
+      "regex": "-----BEGIN (?:RSA|OPENSSH|DSA|EC|PGP) PRIVATE KEY-----",
+      "verdict": "SECRET_LEAK",
+      "score": 100
+    },
+    {
+      "name": "MALICIOUS_SCRIPT",
+      "regex": "(?i)powershell.*ransomware",
+      "verdict": "MALICIOUS",
+      "score": 95
+    },
+    {
+      "name": "CVE_EXPLOIT",
+      "regex": "(?i)CVE-[0-9]{4}-[0-9]{4,}",
+      "verdict": "EXPLOIT",
+      "score": 95
+    }
+  ]
+}

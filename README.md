@@ -227,12 +227,15 @@ laya/
 │   ├── download_models.sh     # ONNX model and tokenizer verification script
 │   ├── run_simulation.py      # 20-scenario semantic validation benchmark
 │   └── benchmark.py           # Multi-threaded Python latency benchmark
-└── docs/                      # Blueprints, plans, reports, and testing guides
+└── docs/                      # Server user guide, client manual, benchmarks, and testing guides
 ```
 
 ---
 
 ## System Service & Daemon Operation
+
+> [!TIP]
+> See [`docs/LAYA_SERVER_USER_GUIDE.md`](docs/LAYA_SERVER_USER_GUIDE.md) for the complete daemon operational protocol, dual-part binary wire framing specification, cache invalidation, and custom client integration examples in Python and C/C++.
 
 ### Systemd Service Management
 

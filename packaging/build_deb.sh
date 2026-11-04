@@ -63,6 +63,9 @@ install -m 0644 "$REPO_ROOT/README.md" "$STAGING_DIR/usr/share/doc/$PACKAGE_NAME
 if [ -f "$REPO_ROOT/docs/LAYA_CLIENT.md" ]; then
     install -m 0644 "$REPO_ROOT/docs/LAYA_CLIENT.md" "$STAGING_DIR/usr/share/doc/$PACKAGE_NAME/LAYA_CLIENT.md"
 fi
+if [ -f "$REPO_ROOT/docs/LAYA_SERVER_USER_GUIDE.md" ]; then
+    install -m 0644 "$REPO_ROOT/docs/LAYA_SERVER_USER_GUIDE.md" "$STAGING_DIR/usr/share/doc/$PACKAGE_NAME/LAYA_SERVER_USER_GUIDE.md"
+fi
 if [ -f "$REPO_ROOT/man/man1/laya_client.1" ]; then
     gzip -9 -n -c "$REPO_ROOT/man/man1/laya_client.1" > "$STAGING_DIR/usr/share/man/man1/laya_client.1.gz"
     chmod 0644 "$STAGING_DIR/usr/share/man/man1/laya_client.1.gz"

@@ -19,6 +19,10 @@
 #include <poppler-page.h>
 #include <archive.h>
 #include <archive_entry.h>
+#include <thread>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <fcntl.h>
 
 namespace laya {
 
@@ -192,6 +196,86 @@ public:
     }
 
     /**
+     * @brief In-memory OCR text extraction for image buffers (PNG, JPEG, WebP) via streaming pipes.
+     * @param data Pointer to raw image bytes.
+     * @param len Size of image buffer.
+     * @return Extracted plain text via optical character recognition.
+     */
+    static std::string extract_image(const char* data, size_t len) {
+        std::string full_text;
+        if (!data || len == 0) return full_text;
+
+        int in_pipe[2];
+        int out_pipe[2];
+        if (pipe(in_pipe) != 0) return full_text;
+        if (pipe(out_pipe) != 0) {
+            close(in_pipe[0]);
+            close(in_pipe[1]);
+            return full_text;
+        }
+
+        pid_t pid = fork();
+        if (pid < 0) {
+            close(in_pipe[0]);
+            close(in_pipe[1]);
+            close(out_pipe[0]);
+            close(out_pipe[1]);
+            return full_text;
+        }
+
+        if (pid == 0) {
+            // Child process
+            close(in_pipe[1]);
+            close(out_pipe[0]);
+            dup2(in_pipe[0], STDIN_FILENO);
+            dup2(out_pipe[1], STDOUT_FILENO);
+            close(in_pipe[0]);
+            close(out_pipe[1]);
+
+            int devnull = open("/dev/null", O_WRONLY);
+            if (devnull >= 0) {
+                dup2(devnull, STDERR_FILENO);
+                close(devnull);
+            }
+
+            execlp("tesseract", "tesseract", "stdin", "stdout", nullptr);
+            _exit(127);
+        }
+
+        // Parent process
+        close(in_pipe[0]);
+        close(out_pipe[1]);
+
+        // Stream image bytes to OCR engine in background thread to avoid pipe buffer deadlocks
+        std::thread writer([in_fd = in_pipe[1], data, len]() {
+            size_t written = 0;
+            while (written < len) {
+                ssize_t n = write(in_fd, data + written, len - written);
+                if (n <= 0) break;
+                written += n;
+            }
+            close(in_fd);
+        });
+
+        // Read extracted OCR text from output pipe
+        char buf[4096];
+        ssize_t n;
+        while ((n = read(out_pipe[0], buf, sizeof(buf))) > 0) {
+            full_text.append(buf, n);
+        }
+        close(out_pipe[0]);
+
+        if (writer.joinable()) {
+            writer.join();
+        }
+
+        int status = 0;
+        waitpid(pid, &status, 0);
+
+        return full_text;
+    }
+
+    /**
      * @brief Automatically detects format and extracts plain text.
      */
     static std::string extract_auto(const char* data, size_t len) {
@@ -200,6 +284,8 @@ public:
             return extract_pdf(data, len);
         } else if (type == DocumentType::ARCHIVE_OFFICE) {
             return extract_archive(data, len);
+        } else if (type == DocumentType::IMAGE) {
+            return extract_image(data, len);
         }
         // Fallback: treat as plain UTF-8 text
         return std::string(data, len);
